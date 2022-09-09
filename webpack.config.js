@@ -1,4 +1,5 @@
 const path = require('path'); // path lo incluye node
+const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // para trabajar con html
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -51,6 +52,13 @@ module.exports = {
     new MiniCssExtractPlugin({
       // indico donde generar el css final
       filename: 'assets/[name].css',
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: 'public/manifest.json', to: '' },
+        { from: 'public/service-worker.js', to: '' },
+        { from: 'public/icon.png', to: 'assets' },
+      ],
     }),
   ],
   devServer: {
